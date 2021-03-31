@@ -11,14 +11,8 @@ export const ProductCardWrapper = styled.div`
         position:absolute;
         left:-12px;
         width:100%;
-        top:260px;
         background:white;
         padding:6px 0;
-        z-index:-1;
-        opacity:0;
-        transition: all 0.5s ease;
-    }
-    .wrapper:hover .buttonWrapper{
         z-index:0;
         top:240px;
         opacity:1;
