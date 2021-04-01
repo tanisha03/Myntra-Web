@@ -1,5 +1,5 @@
 import React,{useContext} from 'react'
-import ProductCard from "../components/ProductCard";
+import WishlistCard from "../components/WishlistCard";
 import styled from 'styled-components';
 import ShopContext from '../context/shop-context';
 
@@ -19,8 +19,13 @@ export default function Wishlist() {
     const context = useContext(ShopContext);
     return (
                     <ProductsWrapper>
-                        {   context.products.map(product=>
-                                <ProductCard data={product} addToList={context.addProductToCart} cart={context.cart} createList={context.createList}/>
+                        {   context.cart.map(list=>
+                                <WishlistCard data={list}/>
+                                // <ProductCard data={product} onClick={context.removeProductFromCart.bind(
+                                //     this,
+                                //     product.id
+                                //   )} 
+                                // remove={true}/>
                             )
                         }
                     </ProductsWrapper>
