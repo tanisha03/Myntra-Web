@@ -37,11 +37,28 @@
     <title>React App</title>
 </head>
 
-<body>
+<body style="position: relative;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div>
-        <button id="start-togetherjs" type="button" onclick="TogetherJS(this); return false" data-end-togetherjs-html="End TogetherJS">Start</button>
-        <input type="text" />
+    <button style="position: fixed; top:50px; right: 0; z-index: 2;" onclick="openPanel()" id="btn-panel">Open</button>
+    <div style="position: fixed; top:100px; right: 0; z-index: 2; display: none; background-color: aqua;" id="panel">
+        <input type="text" style="display:none; height:30px" id="list" />
+        <button style="border: 2px solid black;
+          background-color: black;
+          color: white;
+          border-radius: 8px;
+          padding: 8px 14px;
+          font-size: 16px;
+          cursor: pointer;" onclick="openList()">
+        Open Shopping List
+        </button>
+
+        <button style="border: 2px solid black;
+        background-color: black;
+        color: white;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 16px;
+        cursor: pointer;" id="start-togetherjs" type="button" onclick="TogetherJS(this); return false" data-end-togetherjs-html="End TogetherJS">Shop Together</button>
     </div>
     <div id="root"></div>
     <!--
@@ -54,6 +71,18 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <script>
+        function openList() {
+            var a = document.querySelector("#list");
+            a.style.display = "inline	";
+        }
+
+        function openPanel() {
+            var a = document.querySelector("#panel");
+            a.style.display = "inline	";
+            // document.querySelector("#btn-panel");
+        }
+    </script>
 </body>
 
 </html>
