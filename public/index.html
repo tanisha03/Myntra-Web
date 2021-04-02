@@ -39,26 +39,83 @@
 
 <body style="position: relative;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <button style="position: fixed; top:50px; right: 0; z-index: 2;" onclick="openPanel()" id="btn-panel">Open</button>
-    <div style="position: fixed; top:100px; right: 0; z-index: 2; display: none; background-color: aqua;" id="panel">
-        <input type="text" style="display:none; height:30px" id="list" />
-        <button style="border: 2px solid black;
-          background-color: black;
-          color: white;
-          border-radius: 8px;
-          padding: 8px 14px;
-          font-size: 16px;
-          cursor: pointer;" onclick="openList()">
-        Open Shopping List
-        </button>
+    <button style="position: fixed; top:30px; right: 0; z-index: 2; border-radius:50%; border: 0; padding:12px; background-color: #ff3e6c; cursor: pointer;" id="start-togetherjs" type="button" onclick="TogetherJS(this); return false" data-end-togetherjs-html="End TogetherJS">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" height="25px" width="30px" fill="#fff"
+	 viewBox="0 0 512 512">
+          <g>
+            <g>
+              <path d="M347,242H15c-8.291,0-15,6.709-15,15v210c0,24.814,20.186,45,45,45h272c24.814,0,45-20.186,45-45V257
+                C362,248.709,355.291,242,347,242z M270,332c0,49.629-40.371,90-90,90c-49.629,0-90-40.371-90-90v-15c0-8.291,6.709-15,15-15
+                s15,6.709,15,15v15c0,33.091,26.909,60,60,60s60-26.909,60-60v-15c0-8.291,6.709-15,15-15s15,6.709,15,15V332z"/>
+            </g>
+          </g>
+          <g>
+            <g>
+              <path d="M497,122h-77V90c0-49.629-40.371-90-90-90c-49.629,0-90,40.371-90,90v32h-77c-8.291,0-15,6.709-15,15v75h199
+                c24.814,0,45,20.186,45,45v210c0,16.948-5.865,32.426-15.383,45H467c24.814,0,45-20.186,45-45V137
+                C512,128.709,505.291,122,497,122z M390,122H270V90c0-33.091,26.909-60,60-60s60,26.909,60,60V122z"/>
+            </g>
+          </g>
+          </svg>
+    </button>
+    <button style="position: fixed; top:30px; right: 65px; z-index: 2; border-radius:50%; border: 0; padding:12px; background-color: #ff3e6c; cursor: pointer;" onclick="openList()">
+      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" height="25px" width="30px" fill="#fff"
+          viewBox="0 0 512 512">
+        <g>
+          <g>
+            <path d="M336,32h-34.752C294.656,13.376,276.864,0,256,0s-38.656,13.376-45.28,32H176c-8.832,0-16,7.168-16,16v64
+              c0,8.832,7.168,16,16,16h160c8.832,0,16-7.168,16-16V48C352,39.168,344.832,32,336,32z"/>
+          </g>
+        </g>
+        <g>
+          <g>
+            <path d="M416,64h-32v48c0,26.464-21.536,48-48,48H176c-26.464,0-48-21.536-48-48V64H96c-17.632,0-32,14.368-32,32v384
+              c0,17.952,14.048,32,32,32h320c17.952,0,32-14.048,32-32V96C448,78.048,433.952,64,416,64z M251.328,347.328l-64,64
+              C184.192,414.432,180.096,416,176,416s-8.192-1.568-11.328-4.672l-32-32c-6.24-6.24-6.24-16.384,0-22.624s16.384-6.24,22.624,0
+              L176,377.376l52.672-52.672c6.24-6.24,16.384-6.24,22.624,0S257.568,341.056,251.328,347.328z M251.328,219.328l-64,64
+              C184.192,286.432,180.096,288,176,288s-8.192-1.568-11.328-4.672l-32-32c-6.24-6.24-6.24-16.384,0-22.624s16.384-6.24,22.624,0
+              L176,249.376l52.672-52.672c6.24-6.24,16.384-6.24,22.624,0C257.536,202.944,257.568,213.056,251.328,219.328z M368,384h-64
+              c-8.832,0-16-7.168-16-16c0-8.832,7.168-16,16-16h64c8.832,0,16,7.168,16,16C384,376.832,376.832,384,368,384z M368,256h-64
+              c-8.832,0-16-7.168-16-16c0-8.832,7.168-16,16-16h64c8.832,0,16,7.168,16,16C384,248.832,376.832,256,368,256z"/>
+          </g>
+        </g>
+        </svg>
+    </button>
+    <div style="position: fixed; top:70px; right: 0; z-index: 2; background-color: aqua; display: none; width: 200px;
+    height: 150px;
+    margin: 25px auto;
+    padding: 15px;
+    background:#ffc;
+    -webkit-box-shadow: 0 2px 12px rgba(0,0,0,.5);
+    -moz-box-shadow: 0 2px 12px rgba(0,0,0,.5);
+    box-shadow: 0 1px 2px #000;" id="list">
+        <div style="position: absolute; right:5px; top:5px; cursor: pointer;" onclick="CloseList()">
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" height="15px" width="20px" viewBox="0 0 511.995 511.995">
+          <g>
+            <g>
+              <path d="M437.126,74.939c-99.826-99.826-262.307-99.826-362.133,0C26.637,123.314,0,187.617,0,256.005
+                s26.637,132.691,74.993,181.047c49.923,49.923,115.495,74.874,181.066,74.874s131.144-24.951,181.066-74.874
+                C536.951,337.226,536.951,174.784,437.126,74.939z M409.08,409.006c-84.375,84.375-221.667,84.375-306.042,0
+                c-40.858-40.858-63.37-95.204-63.37-153.001s22.512-112.143,63.37-153.021c84.375-84.375,221.667-84.355,306.042,0
+                C493.435,187.359,493.435,324.651,409.08,409.006z"/>
+            </g>
+          </g>
+          <g>
+            <g>
+              <path d="M341.525,310.827l-56.151-56.071l56.151-56.071c7.735-7.735,7.735-20.29,0.02-28.046
+                c-7.755-7.775-20.31-7.755-28.065-0.02l-56.19,56.111l-56.19-56.111c-7.755-7.735-20.31-7.755-28.065,0.02
+                c-7.735,7.755-7.735,20.31,0.02,28.046l56.151,56.071l-56.151,56.071c-7.755,7.735-7.755,20.29-0.02,28.046
+                c3.868,3.887,8.965,5.811,14.043,5.811s10.155-1.944,14.023-5.792l56.19-56.111l56.19,56.111
+                c3.868,3.868,8.945,5.792,14.023,5.792c5.078,0,10.175-1.944,14.043-5.811C349.28,331.117,349.28,318.562,341.525,310.827z"/>
+            </g>
+          </g>
+          </svg>
+        </div>
+        <textarea style="height:30px; background:#ffc; width:100%; height:100%; padding-top: 0;
+        padding-left: 0; border:0; white-space: nowrap; outline: none;"></textarea>
 
-        <button style="border: 2px solid black;
-        background-color: black;
-        color: white;
-        border-radius: 8px;
-        padding: 8px 14px;
-        font-size: 16px;
-        cursor: pointer;" id="start-togetherjs" type="button" onclick="TogetherJS(this); return false" data-end-togetherjs-html="End TogetherJS">Shop Together</button>
+        <!-- <button 
+        cursor: pointer;" id="start-togetherjs" type="button" onclick="TogetherJS(this); return false" data-end-togetherjs-html="End TogetherJS">Shop Together</button> -->
     </div>
     <div id="root"></div>
     <!--
@@ -77,10 +134,9 @@
             a.style.display = "inline	";
         }
 
-        function openPanel() {
-            var a = document.querySelector("#panel");
-            a.style.display = "inline	";
-            // document.querySelector("#btn-panel");
+        function CloseList() {
+            var a = document.querySelector("#list");
+            a.style.display = "none";
         }
     </script>
 </body>
