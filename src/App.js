@@ -5,18 +5,12 @@ import Index from "./pages/Index";
 import List from "./pages/List";
 import Wishlist from "./pages/Wishlist";
 import GlobalState from "./context/GlobalState";
+import Footer from "./components/Footer"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from "./pages/Login";
+import Categories from "./pages/Categories";
 
-export const WishlistContext = React.createContext();
 
-const wishlist = [
-  {
-    id:1,
-    items:[{
-      id:1,
-      name:"Hello"
-    }]
-  }
-]
 
 function App() {
   return (
@@ -24,10 +18,13 @@ function App() {
       <BrowserRouter>
         <Navbar/>
         <Switch>
-          <Route path="/" component={Index} exact />
+          <Route path="/" component={Categories} exact />
+          <Route path="/categories" component={Categories} exact />
           <Route path="/cart" component={Wishlist} exact />
           <Route path="/cart/:id" component={List} exact />
+          <Route path="/login" component={Login} exact />
         </Switch>
+        <Footer/>
       </BrowserRouter>
     </GlobalState>
   );
