@@ -5,7 +5,7 @@ import ShopContext from '../context/shop-context';
 
 
 const ProductsWrapper = styled.div`
-    margin-top:40px;
+    // margin-top:40px;
     display:flex;
     align-items:center;
     flex-wrap:wrap;

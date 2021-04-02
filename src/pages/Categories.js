@@ -25,7 +25,7 @@ const Categories = () =>{
 
                 <Col md={9}>
                 <Container>
-                        <Container className="text-right">
+                        <Container className="text-right" style={{borderBottom:"1px solid #ccc", paddingBottom:"20px"}}>
                             <select id="dropdown-basic-button" title="Sort By : Recommended" variant="secondary" style={{borderRadius:0, width:"250px", height:"40px" ,padding:"0 10px"}}>
                                 <option href="#/action-1">What's New</option>
                                 <option href="#/action-2">Popularity</option>
