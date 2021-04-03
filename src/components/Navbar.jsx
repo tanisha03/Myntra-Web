@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faShoppingBag } from '@fortawesome/free-solid-svg-icons'
-import { faUser, faBookmark } from '@fortawesome/free-regular-svg-icons'
+import { faBellSlash, faDumbbell, faSearch, faShoppingBag } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faBookmark, faBell } from '@fortawesome/free-regular-svg-icons'
 import { Button } from 'react-bootstrap';
 
 
@@ -51,7 +51,7 @@ export default function Navbar() {
             <div className="column">
                     <div className="icon"><FontAwesomeIcon icon={faUser} /><br/>Profile</div>
                     <Link to="/cart"><div className="icon"><FontAwesomeIcon icon={faBookmark} /><br/>Wishlist</div></Link>
-                    <div className="icon"><FontAwesomeIcon icon={faShoppingBag} /><br/>Bag</div>
+                    <div className="icon"><FontAwesomeIcon icon={faBell} /><br/>Notifications</div>
             </div>
         </NavWrapper>
     )

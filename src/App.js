@@ -9,7 +9,7 @@ import Footer from "./components/Footer"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from "./pages/Login";
 import Categories from "./pages/Categories";
-
+import Studio from "./pages/Studio"
 
 
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Route path="/categories" component={Categories} exact />
           <Route path="/cart" component={Wishlist} exact />
           <Route path="/cart/:id" component={List} exact />
+          <Route path="/studio" component={Studio} exact />
           <Route path="/login" component={Login} exact />
         </Switch>
         <Footer/>
