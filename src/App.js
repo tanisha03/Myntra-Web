@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Categories from "./pages/Categories";
 import Studio from "./pages/Studio"
 import Profile from "./pages/Profile"
+import Notification from "./pages/Notification"
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <Route path="/cart/:id" component={List} exact />
           <Route path="/studio" component={Studio} exact />
           <Route path="/profile/:username" component={Profile} exact />
+          <Route path="/notification" component={Notification} exact />
           <Route path="/login" component={Login} exact />
         </Switch>
         <Footer/>

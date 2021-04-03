@@ -51,7 +51,7 @@ export default function Navbar() {
             <div className="column">
                     <div className="icon"><FontAwesomeIcon icon={faUser} /><br/>Profile</div>
                     <Link to="/cart"><div className="icon"><FontAwesomeIcon icon={faBookmark} /><br/>Wishlist</div></Link>
-                    <div className="icon"><FontAwesomeIcon icon={faBell} /><br/>Notifications</div>
+                    <Link to="/notification"><div className="icon"><FontAwesomeIcon icon={faBell} /><br/>Notifications</div></Link>
             </div>
         </NavWrapper>
     )

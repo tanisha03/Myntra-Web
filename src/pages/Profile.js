@@ -1,6 +1,8 @@
-import React from 'react'
+import React,{useState} from 'react'
 import styled from 'styled-components';
 import PostList from "../components/PostList";
+import TextField from '@material-ui/core/TextField';
+import Modal from 'react-modal';
 
 
 const posts = [
@@ -67,8 +69,19 @@ const ProfileWrapper = styled.div`
         }
     }
 `;
+const ModalHeader = styled.div`
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+`;
+
 
 export default function Profile() {
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const closeModal = () => {
+        setModalOpen(false);
+    }
     return (
         <ProfileWrapper>
             <div className="pImg">
@@ -79,7 +92,7 @@ export default function Profile() {
                 </div>
                 <div className="btns">
                     <button style={{marginBottom:"12px"}}>+ FOLLOW</button><br/>
-                    <button>+ COLLAB</button>
+                    <button onClick={()=> setModalOpen(true)}>+ COLLAB</button>
                 </div>
             </div>
             <div>
@@ -87,6 +100,49 @@ export default function Profile() {
                     <PostList post={post}/>
                 ))}
             </div>
+            <Modal
+               isOpen={modalOpen}
+               onRequestClose={closeModal}
+               contentLabel="Wishlists"
+               style={{
+                   content:{
+                   width:"50%",
+                   top : '50%',
+                    left                  : '50%',
+                    right                 : 'auto',
+                    bottom                : 'auto',
+                    marginRight           : '-50%',
+                    transform             : 'translate(-50%, -50%)'
+               }}}
+            >
+                <ModalHeader>
+                    <h2>Book Appointment</h2>
+                    <button onClick={closeModal}>X</button>
+                </ModalHeader>
+                <div>
+                <TextField
+                    id="date"
+                    label="Birthday"
+                    type="date"
+                    defaultValue="2017-05-24"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                />
+                <TextField
+                    id="time"
+                    label="Alarm clock"
+                    type="time"
+                    defaultValue="07:30"
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                    inputProps={{
+                    step: 300, // 5 min
+                    }}
+                />
+                </div>
+            </Modal>
         </ProfileWrapper>
     )
 }
