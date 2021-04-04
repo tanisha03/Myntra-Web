@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components';
 import PostList from "../components/PostList";
-
+import {db} from "../scripts/firebase"
 
 const posts = [
     {
@@ -45,12 +45,27 @@ const StudioWrapper = styled.div`
 
 
 export default function Studio() {
+    const [postArr, setPostArr] = useState([]);
+    // let postArr=null;
+    let p=[];
+    db.collection('posts').get().then(querySnapShot => {
+        querySnapShot.forEach(doc=>{
+            p.push(doc.data())
+        })
+    })
+    .then(()=>{
+        setPostArr(p);
+        console.log(p, postArr.length);
+    })
+    .catch(err=>console.log(err));
+
     return (
         <StudioWrapper>
             {
-                posts.map(post=>(
+                postArr.length==0 ? 'Loading' : 
+                (postArr.map(post=>(
                     <PostList post={post}/>
-                ))
+                )))
             }
         </StudioWrapper>
     )

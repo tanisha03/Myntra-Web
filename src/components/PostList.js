@@ -52,14 +52,14 @@ export default function PostList({post}) {
         <PostWrapper>
                         <Link to={`/profile/${post.username}`}>
                             <div className="topProfile">
-                                    <img src={post.img} className="profile"/>
+                                    <img src={post.profile} className="profile"/>
                                     <div>
                                         <h2>{post.name} <span>FOLLOW</span></h2>
                                         <h3>@{post.username}</h3>
                                     </div>
                             </div>
                         </Link>
-                        <img src={post.img} className="post"/>
+                        <img src={post.post} className="post"/>
                         <p>
                         <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" height="25px" width="25px" fill="#777"
                             viewBox="0 0 412.735 412.735">

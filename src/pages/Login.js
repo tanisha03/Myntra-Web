@@ -5,6 +5,8 @@ import FacebookLogin from 'react-facebook-login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import '../App.css'; 
+import {Link} from 'react-router-dom';
+
 const Login = () =>{
 
     return(
@@ -29,9 +31,11 @@ const Login = () =>{
                         <Form.Control type="password" placeholder="Enter your Password here" />
                         <small className="text-left">Forgot your password?<spam style={{color:'orange'}}>Click here</spam></small>
                     </Form.Group>
+                    <Link to="/">
                     <Button variant="danger" style={{width: "100%", backgroundColor:"#ff3f6c", borderRadius:'0'}} type="submit">
                         Login
                     </Button>
+                    </Link>
                     </Form>
                     <small className="text-left">Don't have an Account?<spam style={{color:'orange'}}>Register here</spam></small>
                 </Card.Body>

@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import PostList from "../components/PostList";
 import TextField from '@material-ui/core/TextField';
 import Modal from 'react-modal';
-
+import { useParams } from 'react-router-dom'
+import {db} from "../scripts/firebase"
 
 const posts = [
     {
@@ -77,29 +78,62 @@ const ModalHeader = styled.div`
 
 
 export default function Profile() {
+    const [profileData, setProfileData] = useState({});
     const [modalOpen, setModalOpen] = useState(false);
+
+    const {username} = useParams();
 
     const closeModal = () => {
         setModalOpen(false);
     }
+    let data={}
+    db.collection('users').doc(username).get().then(doc => {
+        if(doc.exists){
+            data.username=username;
+            data.name=doc.data().name;
+            data.followers=doc.data().followers;
+            data.NoOfposts=doc.data().NoOfposts;
+            let arr=[];
+            doc.data().posts.forEach(postId=>{
+                db.collection('posts').doc(postId).get().then(doc=>{
+                    arr.push(doc.data())
+                })
+                .then(()=>{})
+            })
+            data.posts=arr;
+        }
+    })
+    .then(()=>{
+        setProfileData(data);
+        // console.log(profileData);
+    })
+    .catch(err=>console.log(err));
+
     return (
         <ProfileWrapper>
-            <div className="pImg">
-                <div className="details">
-                    <h2>Ananya Gupta</h2>
-                    <h3>@ gupaana</h3>
-                    <p>564 Followers   36 Posts</p>
-                </div>
-                <div className="btns">
-                    <button style={{marginBottom:"12px"}}>+ FOLLOW</button><br/>
-                    <button onClick={()=> setModalOpen(true)}>+ COLLAB</button>
-                </div>
-            </div>
-            <div>
-                {posts.map(post=>(
-                    <PostList post={post}/>
-                ))}
-            </div>
+            {
+                profileData==={} ? 'Loading' : (
+                    <>
+                    <div className="pImg">
+                        <div className="details">
+                            <h2>{profileData.name}</h2>
+                            <h3>@ {profileData.username}</h3>
+                            <p>{profileData.followers} Followers   {profileData.NoOfposts} Posts</p>
+                        </div>
+                        <div className="btns">
+                            <button style={{marginBottom:"12px"}}>+ FOLLOW</button><br/>
+                            <button onClick={()=> setModalOpen(true)}>+ COLLAB</button>
+                        </div>
+                    </div>
+                    <p>                        {setProfileData.posts?.length}</p>
+                    <div>
+                        {setProfileData.posts && setProfileData.posts.map(post=>(
+                            <PostList post={post}/>
+                        ))}
+                    </div>
+                    </>
+                )
+            }
             <Modal
                isOpen={modalOpen}
                onRequestClose={closeModal}
