@@ -59,25 +59,53 @@ export default function Notification() {
             {
                 Notifications && Notifications.map(n=>(
                     <NotificationWrapper>
-                        You have an scheduled appointment from {n.from} on {n.date} at {n.time}. Join at <a href={n.link}>{n.link}</a>. <br/> Details : {n.desc} <br/>
-                        <span>
-                            <button onClick={()=>sendAcceptance(n)}>
-                                Accept
-                            </button>
-                            <button>Reject</button>
-                        </span>
-                        {/* <span>
-                            {
-                                actionDone ? 'Accepted' : (
-                                    <>
-                                        <button onClick={()=>sendAcceptance(n)}>
-                                            {loading ? <img src="https://i.gifer.com/ZZ5H.gif" style={{width:"25px", height:"25px"}}/> : 'Accept'}
-                                        </button>
-                                        <button>Reject</button>
-                                    </>
-                                )
-                            }
-                        </span> */}
+                        {
+                            (localStorage.getItem("username") === 'guptavan' && n.type==='influencer') ? (
+                                <>
+                                You have an scheduled appointment from {n.from} on {n.date} at {n.time}. Join at <a href={n.link}>{n.link}</a>. <br/> Details : {n.desc} <br/>
+                                <span>
+                                    <button onClick={()=>sendAcceptance(n)}>
+                                        Accept
+                                    </button>
+                                    <button>Reject</button>
+                                </span>
+                                {/* <span>
+                                    {
+                                        actionDone ? 'Accepted' : (
+                                            <>
+                                                <button onClick={()=>sendAcceptance(n)}>
+                                                    {loading ? <img src="https://i.gifer.com/ZZ5H.gif" style={{width:"25px", height:"25px"}}/> : 'Accept'}
+                                                </button>
+                                                <button>Reject</button>
+                                            </>
+                                        )
+                                    }
+                                </span> */}
+                                </>
+                            ) : (
+                                <>
+                                You appointment with {n.from} on {n.date} at {n.time} is scheduled at <a href={n.link}>{n.link}</a>. <br/> Details : {n.desc} <br/>
+                                <span>
+                                    <button onClick={()=>sendAcceptance(n)}>
+                                        Pay {n.amount}
+                                    </button>
+                                    {/* <button>Reject</button> */}
+                                </span>
+                                {/* <span>
+                                    {
+                                        actionDone ? 'Accepted' : (
+                                            <>
+                                                <button onClick={()=>sendAcceptance(n)}>
+                                                    {loading ? <img src="https://i.gifer.com/ZZ5H.gif" style={{width:"25px", height:"25px"}}/> : 'Accept'}
+                                                </button>
+                                                <button>Reject</button>
+                                            </>
+                                        )
+                                    }
+                                </span> */}
+                            </>
+                            )
+                        }
                     </NotificationWrapper>
                 ))
             }
