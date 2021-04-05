@@ -55,7 +55,6 @@ export default function Studio() {
     })
     .then(()=>{
         setPostArr(p);
-        console.log(p, postArr.length);
     })
     .catch(err=>console.log(err));
 

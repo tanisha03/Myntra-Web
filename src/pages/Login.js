@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { Container, Card,Form,Button } from 'react-bootstrap';
 import GoogleButton from 'react-google-button'
 import FacebookLogin from 'react-facebook-login';
@@ -7,7 +7,9 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import '../App.css'; 
 import {Link} from 'react-router-dom';
 
-const Login = () =>{
+const Login = (props) =>{
+    const [username, setUsername] = useState("");
+    const [loading, setLoading] = useState(false);
 
     return(
         <Container className="bg-body" style={{maxWidth:"100%",padding:"2rem 0"}}>
@@ -22,8 +24,8 @@ const Login = () =>{
                 <hr/>
                 <Form>
                     <Form.Group controlId="formBasicEmail">
-                        <p className="text-left">Email</p>
-                        <Form.Control type="email" placeholder="Enter your email here" />
+                        <p className="text-left">Username</p>
+                        <Form.Control type="email" placeholder="Enter your username here" onChange={e=>setUsername(e.target.value)}/>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
@@ -31,11 +33,18 @@ const Login = () =>{
                         <Form.Control type="password" placeholder="Enter your Password here" />
                         <small className="text-left">Forgot your password?<spam style={{color:'orange'}}>Click here</spam></small>
                     </Form.Group>
-                    <Link to="/">
-                    <Button variant="danger" style={{width: "100%", backgroundColor:"#ff3f6c", borderRadius:'0'}} type="submit">
-                        Login
+                    {/* <Link to="/"> */}
+                    <Button variant="danger" style={{width: "100%", backgroundColor:"#ff3f6c", borderRadius:'0'}} onClick={()=>{
+                        setLoading(true);
+                        setTimeout(()=>{
+                            localStorage.setItem("username", username);
+                            props.history.push("/");
+                        },3000);
+                    }}>
+                        {/* <img src="https://i.gifer.com/ZZ5H.gif" style={{width:"30px", height:"30px"}}/> */}
+                        {loading ? <img src="https://i.gifer.com/ZZ5H.gif" style={{width:"30px", height:"30px"}}/> : 'Login'}
                     </Button>
-                    </Link>
+                    {/* </Link> */}
                     </Form>
                     <small className="text-left">Don't have an Account?<spam style={{color:'orange'}}>Register here</spam></small>
                 </Card.Body>

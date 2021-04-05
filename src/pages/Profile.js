@@ -78,14 +78,43 @@ const ModalHeader = styled.div`
 
 
 export default function Profile() {
+    const [loading, setLoading] = useState(false);
     const [profileData, setProfileData] = useState({});
     const [modalOpen, setModalOpen] = useState(false);
-
+    const [appointmentDetails, setAppointmentDetails] = useState({
+        desc:"",
+        date:new Date().toJSON().slice(0,10),
+        time:new Date().toTimeString().split(" ")[0].slice(0,5)
+    })
     const {username} = useParams();
 
     const closeModal = () => {
         setModalOpen(false);
+    };
+    
+    const onChangeHandler = (e) => {
+        setAppointmentDetails({...appointmentDetails, [e.target.id]:e.target.value});
+    };
+
+    const handleSubmit = () => {
+        setLoading(true);
+        let dataToBeAdded = appointmentDetails;
+        dataToBeAdded.from = localStorage.getItem("username");
+        dataToBeAdded.link = `${window.location.origin}/#&togetherjs=${Math.random().toString(36).slice(2)}`
+        profileData.notifications.unshift(dataToBeAdded);
+        let updatedNotifications = profileData.notifications;
+        // link = "";
+        db.collection('users').doc(username).update({
+            "notifications":updatedNotifications
+        })
+        .then(()=>{
+            setLoading(true);
+            closeModal(); 
+            alert('updated');
+        })
+        .catch(err=>console.log(err))
     }
+    
     let data={}
     db.collection('users').doc(username).get().then(doc => {
         if(doc.exists){
@@ -93,6 +122,7 @@ export default function Profile() {
             data.name=doc.data().name;
             data.followers=doc.data().followers;
             data.NoOfposts=doc.data().NoOfposts;
+            data.notifications = doc.data().notifications || [];
             let arr=[];
             doc.data().posts.forEach(postId=>{
                 db.collection('posts').doc(postId).get().then(doc=>{
@@ -125,7 +155,7 @@ export default function Profile() {
                             <button onClick={()=> setModalOpen(true)}>+ COLLAB</button>
                         </div>
                     </div>
-                    <p>                        {setProfileData.posts?.length}</p>
+                    <p>{setProfileData.posts?.length}</p>
                     <div>
                         {setProfileData.posts && setProfileData.posts.map(post=>(
                             <PostList post={post}/>
@@ -137,10 +167,10 @@ export default function Profile() {
             <Modal
                isOpen={modalOpen}
                onRequestClose={closeModal}
-               contentLabel="Wishlists"
+               contentLabel="Appointment"
                style={{
                    content:{
-                   width:"50%",
+                   width:"40%",
                    top : '50%',
                     left                  : '50%',
                     right                 : 'auto',
@@ -151,30 +181,46 @@ export default function Profile() {
             >
                 <ModalHeader>
                     <h2>Book Appointment</h2>
-                    <button onClick={closeModal}>X</button>
+                    <button style={{border:0, background:"white"}} onClick={closeModal}>X</button>
                 </ModalHeader>
                 <div>
+                <label>Describe the subject of the appointment</label><br/>
+                <textarea style={{width:"100%"}} id="desc" onChange={(e) => onChangeHandler(e)} value={appointmentDetails.desc} rows="4"></textarea><br/>
                 <TextField
+                    style={{width:"100%"}}
                     id="date"
-                    label="Birthday"
+                    label="Date"
                     type="date"
-                    defaultValue="2017-05-24"
+                    value={appointmentDetails.date}
+                    onChange={(e) => onChangeHandler(e)}
                     InputLabelProps={{
                     shrink: true,
                     }}
-                />
+                /><br/><br/>
                 <TextField
+                    style={{width:"100%"}}
                     id="time"
-                    label="Alarm clock"
+                    label="Time"
                     type="time"
-                    defaultValue="07:30"
-                    InputLabelProps={{
+                    value={appointmentDetails.time}
+                    onChange={(e) => onChangeHandler(e)}                    InputLabelProps={{
                     shrink: true,
                     }}
                     inputProps={{
                     step: 300, // 5 min
                     }}
-                />
+                /><br/><br/>
+                <button onClick={handleSubmit}
+                style={{
+                    border:"0",
+                    color:"white",
+                    backgroundColor:"#ff3e6c",
+                    fontSize:"0.9em",
+                    padding:"6px 8px",
+                    width:"100%"
+                }}>
+                    {loading ? <img src="https://i.gifer.com/ZZ5H.gif" style={{width:"30px", height:"30px"}}/> : 'Submit'}
+                </button>
                 </div>
             </Modal>
         </ProfileWrapper>

@@ -47,6 +47,9 @@ export default function Navbar() {
                 <div>WOMEN</div>
                 <div>KIDS</div>
                 <div>HOME & LIVING</div>
+                <Link to="/studio">
+                    <div>STUDIO</div>               
+                </Link>
             </div>
             <div className="column">
                     <div className="icon"><FontAwesomeIcon icon={faUser} /><br/>Profile</div>
