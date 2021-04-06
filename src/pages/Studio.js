@@ -60,6 +60,7 @@ export default function Studio() {
 
     return (
         <StudioWrapper>
+            <img src="https://assets.myntassets.com/w_412,h_91,q_50,dpr_2,fl_progressive/assets/images/retaillabs/2020/10/29/4a6521d5-08fc-45d4-b9f3-f5082d96818e1603970712609-studio-headline.png" style={{width:"100%"}}/>
             {
                 postArr.length==0 ? 'Loading' : 
                 (postArr.map(post=>(
