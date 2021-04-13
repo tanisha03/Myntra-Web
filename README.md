@@ -7,7 +7,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Use basic [git](https://services.github.com/on-demand/downloads/github-git-cheat-sheet.pdf) commands to install and run Social-APE
 
 ```bash
-git clone https://github.com/tanisha03/social-APE.git
+git clone https://github.com/tanisha03/Myntra-Web.git
 ```
 Navigate to the required directory using ```cd```, install [node](https://nodejs.org/en/), node packages, and run the server.
 ```bash
